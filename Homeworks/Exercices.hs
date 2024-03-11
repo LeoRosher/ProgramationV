@@ -95,6 +95,29 @@ elem' y (x:xs)
     | otherwise = elem' y xs
 
 
+--7.
+merge :: Ord a => [a] -> [a] -> [a]
+merge [] ys = ys
+merge xs [] = xs
+merge (x:xs) (y:ys)
+    | x <= y    = x : merge xs (y:ys)
+    | otherwise = y : merge (x:xs) ys
+
+
+--8.
+msort :: Ord a => [a] -> [a]
+msort [] = []
+msort [x] = [x]
+msort xs = merge (msort left) (msort right)
+    where
+        (left, right) = halve xs
+
+halve :: [a] -> ([a], [a])
+halve xs = splitAt (length xs `div` 2) xs
+
+
+--9.
+
 
 -- Unidad 7
 
