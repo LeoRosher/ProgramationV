@@ -1,0 +1,46 @@
+!Final Project Programation V
+{
+++++
+&https://cdn-icons-png.flaticon.com/256/25/25281.png
+}
+---
+!Scanner
+{
++++
+The scanner works by taking special characters from the .p5 document, either one or as many as necessary, these were set in the scanner class. Then the content of the .p5 file is parsed and converted to the respective HTML element, building the HTML file.
++++
+
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
++++
+### Text
+++
+***Bold and Italic Text***
++
+**Bold Text**
++
+*Italic Text*
+}
+---
+! Links And Images
+{
+### Links
+@https://www.youtube.com/
+++
+### Images
+&hhttps://www.codeur.com/blog/wp-content/uploads/2022/06/apprendre-programmation-informatique-740x447.jpg
+}
+---
+! Unordered List
+{
+- element 1
+- element 2
+- element 3
+- element 4
+- element 5
+}
+---

@@ -19,9 +19,13 @@ pMarckdownBlock = MdParagraph <$> pStrings
                <|> MdH4 <$ pKeyword "####" <*> pStrings
                <|> MdH5 <$ pKeyword "#####" <*> pStrings
                <|> MdH6 <$ pKeyword "######" <*> pStrings
+               <|> BoldAndItalic <$ pKeyword "***" <*> pStrings <* pKeyword "***"
                <|> Bold <$ pKeyword "**" <*> pStrings <* pKeyword "**"
                <|> Italic <$ pKeyword "*" <*> pStrings <* pKeyword "*"
                <|> UnorderedList <$> (pKeyword "-" *> pListSep (pKeyword "-") pStrings)
+               <|> Link <$ pKeyword "@" <*> pStrings
+               <|> Img <$ pKeyword "&" <*> pStrings
+               <|> Break <$> pKeyword "+" 
 
 --- Join Scanner with Parser
 instance Symbol Token

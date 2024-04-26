@@ -42,13 +42,13 @@ createSlides (x:xs) index = createSlide x index ++ createSlides xs (index + 1)
 createSlide :: Slide -> Int -> String
 createSlide slide index = "<div class=\"itemCarrousel\" id=\"itemCarrousel-" ++ show index ++ "\">"++ "\n" ++
                                 "<div class=\"itemCarrouselTarjeta\">"++ "\n" ++
-                                processSlideContent slide ++  -- Content
+                                processSlideContent slide ++
                                 "</div>"++ "\n" ++
                                 "<div class=\"itemCarrouselArrows\">"++ "\n" ++
-                                "<a href=\"#itemCarrousel-"++ show (index - 1) ++ "\">" ++ "\n" ++
+                                "<a class=\"arrowContainer\" href=\"#itemCarrousel-"++ show (index - 1) ++ "\">" ++ "\n" ++
                                     "<img src=\"resources/chevron-left.svg\"></img>"++ "\n" ++
                                 "</a>"++ "\n" ++
-                                "<a href=\"#itemCarrousel-"++ show (index + 1) ++"\">"++ "\n" ++
+                                "<a class=\"arrowContainer\" href=\"#itemCarrousel-"++ show (index + 1) ++"\">"++ "\n" ++
                                     "<img src=\"resources/chevron-right.svg\"></img>"++ "\n" ++
                                 "</a>"++ "\n" ++
                                 "</div>"++ "\n" ++
@@ -81,15 +81,29 @@ createBold bold = "<b>" ++ bold ++ "</b>" ++ "\n"
 createItalic :: Paragraph -> String
 createItalic italic = "<i>" ++ italic ++ "</i>" ++ "\n"
 
+createBoldAndItalic :: Paragraph -> String
+createBoldAndItalic boldAndItalic = "<b>" ++ "\n" ++
+                                    "<i>" ++ boldAndItalic ++ "</i>" ++ "\n" ++
+                                    "</b>" ++ "\n"
+
 createTitleSlide :: TitleSlide -> String
-createTitleSlide title = "<h1>" ++ getTitleContent title ++ "</h1>" ++ "\n"
+createTitleSlide title = "<h1 style=\"text-align: center;\">" ++ getTitleContent title ++ "</h1>" ++ "\n"
 
 createList :: [Paragraph] -> String
 createList list = "<ul>"++ createElemList list ++"</ul>"
 
 createElemList :: [String] -> String
 createElemList [] = ""
-createElemList (x:xs) = "<li>" ++ show x ++ "</li>" ++ "\n" ++ createElemList xs
+createElemList (x:xs) = "<li>" ++ x ++ "</li>" ++ "\n" ++ createElemList xs
+
+createLink :: Paragraph -> String
+createLink link = "<a href=\""++ link ++"\">"++ link ++"</a>" ++ "\n"
+
+createImg :: Paragraph -> String
+createImg img = "<img src=\"" ++ img ++ "\">" ++"</img>" ++ "\n"
+
+createLineBreak :: Paragraph -> String
+createLineBreak br = "<br>" ++ "\n"
 
 createBodyContent :: [MarkdownBlock] -> String
 createBodyContent [] = ""
@@ -105,7 +119,11 @@ createElem (MdH5 h5) = createH5 h5
 createElem (MdH6 h6) = createH6 h6
 createElem (Bold bold) = createBold bold
 createElem (Italic italic) = createItalic italic
+createElem (BoldAndItalic boldAndItalic) = createBoldAndItalic boldAndItalic
 createElem (UnorderedList list) = createList list
+createElem (Link link) = createLink link
+createElem (Img img) = createImg img
+createElem (Break br) = createLineBreak br
 
 processSlideContent :: Slide -> String
 processSlideContent slide = let tittle = getTitleSlide slide

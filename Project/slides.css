@@ -2,6 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+img {
+    text-align: center;
+}
+
+h1, h2, h3, h4, h5, h6, p, ul{
+    text-align: left; 
+}
+
+b, i, strong, a {
+    display: block;
+    text-align: left;
 }
 
 .carrousel{
@@ -19,11 +33,16 @@
     width: 100%;
     height: 100%;
     background-color: rgb(245, 230, 202);
+    padding: 16vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 .itemCarrouselTarjeta{
     width: 100%;
     height: 100%;
+    text-align: center;
 }
 
 .itemCarrouselArrows{
@@ -55,11 +74,18 @@
     color: grey;
 }
 
-.itemCarrouselArrows img {
+.itemCarrouselArrows a {
     opacity: 0;
     transition: opacity 0.3s ease;
 }
 
-.itemCarrouselArrows img:hover {
+.itemCarrouselArrows a:hover {
     opacity: 1;
+}
+
+.arrowContainer{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

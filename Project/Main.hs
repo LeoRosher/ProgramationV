@@ -6,7 +6,7 @@ import Parser
 
 
 main :: IO ()
-main = do input <- readFile "Slide.p5"
+main = do input <- readFile "Presentation.p5"
           let token = scanner input
           putStrLn(show token)
           tree <- parseIO pSlides token

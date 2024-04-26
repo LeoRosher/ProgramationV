@@ -60,10 +60,14 @@ scan ('#':'#':'#':'#':xs) l c = Token Keyword "####" l c : scan xs l (c+1)
 scan ('#':'#':'#':xs) l c = Token Keyword "###" l c : scan xs l (c+1)
 scan ('#':'#':xs) l c = Token Keyword "##" l c : scan xs l (c+1)
 scan ('#':xs) l c = Token Keyword "#" l c : scan xs l (c+1)
+scan ('*':'*':'*':xs) l c = Token Keyword "***" l c : scan xs l (c+1)
 scan ('*':'*':xs) l c = Token Keyword "**" l c : scan xs l (c+1)
 scan ('*':xs) l c = Token Keyword "*" l c : scan xs l (c+1)
 scan ('-':'-':'-':xs) l c = Token EndSlide "---" l c : scan xs l (c+1)
 scan ('-':xs) l c = Token Keyword "-" l c : scan xs l (c+1)
+scan ('@':xs) l c = Token Keyword "@" l c : scan xs l (c+1)
+scan ('&':xs) l c = Token Keyword "&" l c : scan xs l (c+1)
+scan ('+':xs) l c = Token Keyword "+" l c : scan xs l (c+1)
 scan (';':xs) l c = scan (dropWhile (/= '\n') xs) (l + 1) 1
 scan str@(x:xs) l c
     | x == '\n' = scan xs (l+1) 1
@@ -73,4 +77,20 @@ scan str@(x:xs) l c
     
 isAlphaNumOrSpace :: Char -> Bool
 isAlphaNumOrSpace '\n' = False
-isAlphaNumOrSpace c = isAlphaNum c || isSpace c
+isAlphaNumOrSpace c = isAlphaNum c || isSpace c || charInList c "!@#$%^&()-_+=|\\/{}[];:',.<>?\""
+
+charInList :: Char -> [Char] -> Bool
+charInList _ [] = False
+charInList c (x:xs)
+    | c == x = True
+    | otherwise = charInList c xs
+
+generateHashtags :: Char -> String
+generateHashtags '#' = replicate (digitToInt '#') '#'
+generateHashtags _ = ""
+
+scanHeader :: Char -> Line -> Col -> [Token]
+scanHeader '#' l c = [Token Keyword (generateHashtags '#') l c]
+scanHeader _ _ _ = []
+
+

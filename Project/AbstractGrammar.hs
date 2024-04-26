@@ -31,7 +31,11 @@ data MarkdownBlock = MdParagraph Paragraph
                     | MdH6 H6
                     | Bold Paragraph
                     | Italic Paragraph
+                    | BoldAndItalic Paragraph
                     | UnorderedList [Paragraph]
+                    | Link Strings
+                    | Img Strings
+                    | Break Strings
                     deriving Show
 
 
@@ -79,3 +83,15 @@ getItalic (Italic italicParagraph) = italicParagraph
 
 getUnorderedList :: MarkdownBlock -> [Paragraph]
 getUnorderedList (UnorderedList list) = list
+
+getBoldAndItalic :: MarkdownBlock -> Paragraph
+getBoldAndItalic (BoldAndItalic boldAndItalic) = boldAndItalic
+
+getLink :: MarkdownBlock -> Strings
+getLink (Link link) = link
+
+getImg :: MarkdownBlock -> Strings
+getImg (Img img) = img
+
+getBreak :: MarkdownBlock -> Strings
+getBreak (Break br) = br
