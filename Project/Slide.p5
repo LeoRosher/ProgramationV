@@ -1,0 +1,28 @@
+! Tittle 1
+{
+# this is an H1
+}
+---
+! Tittle 2
+{
+## h2
+### h3
+#### h4
+##### h5
+###### h6
+}
+---
+! Tittle 3
+{
+## Subtittle
+
+*Italic sentence*
+**Bold sentence**
+; This is a comment
+- elem 1
+- elem 2
+- elem 3
+- elem 4
+
+}
+---

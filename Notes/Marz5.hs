@@ -3,7 +3,7 @@
 -- Making the project: roman calculator
 
 -- Course implementation
-module RomanCal where
+module Main where
 
 
 -- "II + III" = "V"
@@ -60,3 +60,11 @@ convertToRoman :: Int -> Int ->  String
 convertToRoman 0 _ = "" 
 convertToRoman num pos | num >= snd (roman2 !! pos) = fst (roman2 !! pos) ++ convertToRoman (num - snd(roman2 !! pos)) pos  
                        | otherwise = convertToRoman num (pos+1)
+
+
+main :: IO ()
+main = mapM_ putStrLn . map calRoman . lines =<< getContents
+
+{-main :: IO ()
+main = do strings <- getContents
+          mapM_ putStrLn $ map calRoman $ lines strings-}
